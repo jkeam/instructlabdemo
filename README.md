@@ -1,6 +1,6 @@
 # Instructlab Demo
 
-Repo to use instruct lab.
+Repo to use Instructlab.
 
 ## Prerequisite
 
