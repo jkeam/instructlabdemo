@@ -1,10 +1,9 @@
 # Instructlab Demo
 
 Repo to use Instructlab.
+For me, all of these instructions are specific to my computer, a 2021 M1 Macbook Pro.
 
 ## Prerequisite
-
-For me, these setup instructions align with my computer, a Macbook Pro.
 
 1. xcode installed and Apple license agreed to
 
