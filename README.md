@@ -46,3 +46,8 @@ One to run the server and the other to run the chat client.
 ```shell
 ./chat.sh
 ```
+
+## References
+
+1. [InstructLab GitHub Repo](https://github.com/instructlab/instructlab)
+2. [InstructLab Taxonomy](https://github.com/instructlab/taxonomy)

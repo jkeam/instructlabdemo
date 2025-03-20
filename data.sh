@@ -1,24 +1,12 @@
 #!/bin/bash
 
-# merlinite-7b-lab-Q4_K_M.gguf | 4.1 GB |
-# ~/.cache/instructlab/models/merlinite-7b-lab-Q4_K_M.gguf
-
-# ibm-granite/granite-embedding-125m-english | 479.2 MB |
-# ~/.cache/instructlab/models/ibm-granite
-
-# mistral-7b-instruct-v0.2.Q4_K_M.gguf | 4.1 GB  |
-# ~/.cache/instructlab/models/mistral-7b-instruct-v0.2.Q4_K_M.gguf
-
-# granite-7b-lab-Q4_K_M.gguf | 3.8 GB |
-# ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
-
 ############################################################
 # Help                                                     #
 ############################################################
 help()
 {
    # Display Help
-   echo "Start the model server."
+   echo "Generate data."
    echo
    echo "Syntax: $(basename $0) [-m|h]"
    echo "options:"
@@ -46,17 +34,26 @@ while getopts ":hm:" option; do
    esac
 done
 
-# serve the model
+# validate
 source ./venv/bin/activate
+ilab taxonomy diff
+if [[ "$?" -ne "0" ]]; then
+  echo 'Taxonomy is invalid.'
+  exit 0
+fi
+
+# generate data
 if [ "$model" = "mistral" ]; then
-  ilab model serve --model-path ~/.cache/instructlab/models/mistral-7b-instruct-v0.2.Q4_K_M.gguf
+  ilab data generate --model ~/.cache/instructlab/models/mistral-7b-instruct-v0.2.Q4_K_M.gguf --pipeline full --gpus 16
 elif [ "$model" = "granite" ]; then
-  ilab model serve --model-path ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf
+  ilab data generate --model ~/.cache/instructlab/models/granite-7b-lab-Q4_K_M.gguf --pipeline full --gpus 16
 elif [ "$model" = "merlinite" ]; then
-  ilab model serve --model-path ~/.cache/instructlab/models/merlinite-7b-lab-Q4_K_M.gguf
-elif [ "$model" = "fullgranite" ]; then
-  ilab model serve --model-path ~/.cache/instructlab/models/instructlab/granite-7b-lab
+  ilab data generate --model ~/.cache/instructlab/models/merlinite-7b-lab-Q4_K_M.gguf --pipeline full --gpus 16
 else
-  echo "Please specify model to run '-m [mistral|granite|merlinite|fullgranite]'"
+  echo "Please specify model to run '-m [mistral|granite|merlinite]'"
   exit 1
 fi
+
+echo "Running ilab data list"
+ilab data list
+echo "Data can be found here: ~/.local/share/instructlab/datasets"
