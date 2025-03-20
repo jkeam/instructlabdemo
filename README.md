@@ -50,6 +50,13 @@ One to run the server and the other to run the chat client.
 ./serve.sh
 ```
 
+If you run this on a Linux machine and want to use vLLM, then you need to be
+aware of this [bug](https://github.com/oobabooga/text-generation-webui/issues/6703).
+
+Which is essentially updating
+`/home/instruct/instructlab/venv/lib64/python3.11/site-packages/lmformatenforcer/integrations/transformers.py`
+and replacing `LogitsWarper` to `LogitsProcessor`.
+
 ### Chat Client
 
 ```shell
