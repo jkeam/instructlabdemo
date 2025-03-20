@@ -1,7 +1,8 @@
 # Instructlab Demo
 
 Repo to use Instructlab.
-For me, all of these instructions are specific to my computer, a 2021 M1 Macbook Pro.
+For me, all of these instructions are specific to my computer,
+a 2021 M1 Macbook Pro.
 
 ## Prerequisite
 
@@ -30,6 +31,14 @@ For me, all of these instructions are specific to my computer, a 2021 M1 Macbook
     ilab model download
     ```
 
+4. Download granite model to be trained
+
+   ```shell
+   ilab model download --repository instructlab/granite-7b-lab
+   # don't need this if doing simple or full training
+   ilab model download --repository prometheus-eval/prometheus-8x7b-v2.0
+   ```
+
 ## Running
 
 To run this, we need two terminals.
@@ -46,6 +55,11 @@ One to run the server and the other to run the chat client.
 ```shell
 ./chat.sh
 ```
+
+### Training
+
+To train, run the synthetic data generation step
+using `./data.sh -m <modelname>` and the training step with `./train.sh`.
 
 ## References
 
